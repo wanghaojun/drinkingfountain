@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+      #ddl-auto: update
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/water
+    username: water
+    password: water
+    test-while-idle: true
+    validation-query: SELECT 1
+
+
+
