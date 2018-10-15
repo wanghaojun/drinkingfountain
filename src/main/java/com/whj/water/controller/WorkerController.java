@@ -47,6 +47,15 @@ public class WorkerController {
         return  workerRepository.save(worker);
     }
 
+    @RequestMapping("/findAll")
+    public Object findAllWorker(){return workerRepository.findAll();}
+
+    @RequestMapping("/findByWxname")
+    public Object findWorkerByWxname(String wxname){
+         return workerRepository.findFirstByWxname(wxname);
+    }
+
+
 
 
 }

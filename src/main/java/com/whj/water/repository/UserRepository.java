@@ -4,4 +4,10 @@ import com.whj.water.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User,Integer> {
+
+    User findFirstByWxname(String wxname);
+
+    User findFirstByPhone(String phone);
+
+
 }

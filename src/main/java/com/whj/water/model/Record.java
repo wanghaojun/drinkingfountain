@@ -1,6 +1,7 @@
 package com.whj.water.model;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -12,12 +13,13 @@ public class Record {
     private int id;
 
     private int userid;
+    private int workerid;
     private String workername;
     private String workercard;
-    private String year;
-    private String month;
-    private String day;
-    private Date time;
+    private int year;
+    private int month;
+    private int day;
+    private String time;
 
     private int serviceId;
 
@@ -52,35 +54,35 @@ public class Record {
         this.workercard = workercard;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth(int month) {
         this.month = month;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(int day) {
         this.day = day;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -90,5 +92,13 @@ public class Record {
 
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
+    }
+
+    public int getWorkerid() {
+        return workerid;
+    }
+
+    public void setWorkerid(int workerid) {
+        this.workerid = workerid;
     }
 }
