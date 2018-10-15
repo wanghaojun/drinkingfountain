@@ -14,14 +14,15 @@ public class Record {
 
     private int userid;
     private int workerid;
-    private String workername;
-    private String workercard;
+
     private int year;
     private int month;
     private int day;
     private String time;
 
     private int serviceId;
+    private String servicename;
+    private String price;
 
     public Record() {
     }
@@ -38,20 +39,20 @@ public class Record {
         this.userid = userid;
     }
 
-    public String getWorkername() {
-        return workername;
+    public String getPrice() {
+        return price;
     }
 
-    public void setWorkername(String workername) {
-        this.workername = workername;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getWorkercard() {
-        return workercard;
+    public String getServicename() {
+        return servicename;
     }
 
-    public void setWorkercard(String workercard) {
-        this.workercard = workercard;
+    public void setServicename(String servicename) {
+        this.servicename = servicename;
     }
 
     public int getYear() {

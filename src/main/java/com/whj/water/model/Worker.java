@@ -14,7 +14,7 @@ public class Worker {
     private String card;
     private String phone;
     private String wxname;
-    private String provice;
+    private String province;
     private String city;
     private String region;
 
@@ -57,12 +57,12 @@ public class Worker {
         this.wxname = wxname;
     }
 
-    public String getProvice() {
-        return provice;
+    public String getProvince() {
+        return province;
     }
 
-    public void setProvice(String provice) {
-        this.provice = provice;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getCity() {

@@ -1,5 +1,6 @@
 package com.whj.water.controller;
 
+import com.whj.water.dto.Message;
 import com.whj.water.model.User;
 import com.whj.water.model.Worker;
 import com.whj.water.repository.UserRepository;
@@ -21,10 +22,19 @@ public class WorkerController {
 
     @RequestMapping(value = "/saveUser",method = RequestMethod.POST)
     public Object saveUser(String name,String phone,String province,String city,String region,String address, String type,String wxname){
+
+        if (wxname!=null && userRepository.findFirstByWxname(wxname)!=null){
+            return new Message(-1,"微信用户已经存在");
+        }
+
+        if (userRepository.findFirstByPhone(phone)!=null){
+            return new Message(-1,"手机用户已经存在");
+        }
+
         User user = new User();
         user.setName(name);
         user.setPhone(phone);
-        user.setProvice(province);
+        user.setProvince(province);
         user.setCity(city);
         user.setRegion(region);
         user.setAddress(address);
@@ -35,12 +45,25 @@ public class WorkerController {
 
     @RequestMapping(value = "/saveWorker",method = RequestMethod.POST)
     public Object saveWorker(String name,String wxname,String card,String phone,String province,String city,String region){
+
+        if (workerRepository.findFirstByWxname(wxname)!=null){
+            return new Message(-1,"微信用户已经存在");
+        }
+
+        if (workerRepository.findFirstByPhone(phone)!=null){
+            return new Message(-1,"手机用户已经存在");
+        }
+
+        if (workerRepository.findFirstByCard(card)!=null){
+            return new Message(-1,"工号已经存在");
+        }
+
         Worker worker = new Worker();
         worker.setName(name);
         worker.setWxname(wxname);
         worker.setCard(card);
         worker.setPhone(phone);
-        worker.setProvice(province);
+        worker.setProvince(province);
         worker.setCity(city);
         worker.setRegion(region);
 

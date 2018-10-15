@@ -9,6 +9,8 @@ public interface WorkerRepository extends CrudRepository<Worker,Integer> {
 
     Worker findFirstByCard(String card);
 
+    Worker findFirstByPhone(String phone);
+
 
 
 }

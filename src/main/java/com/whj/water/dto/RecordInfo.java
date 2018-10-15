@@ -7,15 +7,24 @@ public class RecordInfo {
     public int id;
 
     public int userid;
+    public String username;
+    public String userphone;
+    public String userprovince;
+    public String usercity;
+    public String userregion;
+    public String useraddress;
+
     public int workerid;
     public String workername;
     public String workercard;
+
     public int year;
     public int month;
     public int day;
-    public Date time;
+    public String time;
 
-    public int serviceId;
+    public String servicename;
+    public String serviceprice;
 
 
 

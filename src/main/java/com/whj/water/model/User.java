@@ -15,7 +15,7 @@ public class User {
     private String phone;
     private String type;
     private String password="000000";
-    private String provice;
+    private String province;
     private String city;
     private String region;
     private String address;
@@ -67,12 +67,12 @@ public class User {
         this.password = password;
     }
 
-    public String getProvice() {
-        return provice;
+    public String getProvince() {
+        return province;
     }
 
-    public void setProvice(String provice) {
-        this.provice = provice;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getCity() {
