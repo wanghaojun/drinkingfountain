@@ -11,9 +11,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String userid;
-    private Date time;
+    private int userid;
+    private String time;
     private int serviceId;
+
+    private int year;
+    private int month;
+    private int day;
+
+    private int ispay = 0;
+    private int isservice = 0;
 
     public Reservation() {
     }
@@ -30,19 +37,59 @@ public class Reservation {
         this.serviceId = serviceId;
     }
 
-    public String getUserid() {
+    public int getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getIspay() {
+        return ispay;
+    }
+
+    public void setIspay(int ispay) {
+        this.ispay = ispay;
+    }
+
+    public int getIsservice() {
+        return isservice;
+    }
+
+    public void setIsservice(int isservice) {
+        this.isservice = isservice;
     }
 }

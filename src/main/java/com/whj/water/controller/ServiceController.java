@@ -1,5 +1,6 @@
 package com.whj.water.controller;
 
+import com.whj.water.dto.Message;
 import com.whj.water.model.Service;
 import com.whj.water.repository.ServiceRepository;
 import javafx.geometry.Pos;
@@ -23,6 +24,21 @@ public class ServiceController {
         service.setPrice(price);
         service.setDetail(detail);
         return  serviceRepository.save(service);
+    }
+
+    @RequestMapping("/findAll")
+    public Object findAll(){
+        return serviceRepository.findAll();
+    }
+
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public Object delete(int serviceid){
+        if (serviceRepository.existsById(serviceid)){
+            serviceRepository.deleteById(serviceid);
+            return new Message(1,"delete success");
+        }else {
+            return new Message(-1,"null service");
+        }
     }
 
 

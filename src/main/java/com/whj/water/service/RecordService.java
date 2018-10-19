@@ -1,5 +1,6 @@
 package com.whj.water.service;
 
+import com.whj.water.dto.Message;
 import com.whj.water.dto.RecordInfo;
 import com.whj.water.model.Record;
 import com.whj.water.model.User;
@@ -12,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
-public class RecordInfoService {
+public class RecordService {
 
     @Autowired
     private WorkerRepository workerRepository;
@@ -29,6 +30,38 @@ public class RecordInfoService {
 
     @Autowired
     private ServiceRepository serviceRepository;
+
+
+    public Object create(int userid,int workerid,int serviceid){
+        if (!userRepository.findById(userid).isPresent()){
+            return new Message(-1,"null user");
+        }
+
+        if (!workerRepository.findById(workerid).isPresent()){
+            return new Message(-1,"null worker");
+        }
+
+        if (!serviceRepository.findById(serviceid).isPresent()){
+            return new Message(-1,"null service");
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");     // 北京
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        Record record = new Record();
+        record.setUserid(userid);
+        record.setWorkerid(workerid);
+        record.setServiceId(serviceid);
+        com.whj.water.model.Service service = serviceRepository.findById(serviceid).get();
+        record.setServicename(service.getName());
+        record.setPrice(service.getPrice());
+        record.setTime(dateFormat.format(new Date()));
+        record.setMonth(calendar.get(Calendar.MONTH)+1);
+        record.setYear(calendar.get(Calendar.YEAR));
+        record.setDay(calendar.get(Calendar.DATE));
+        return recordRepository.save(record);
+    }
 
     public Object findByWorkerid(int workerid){
         Iterable<Record> records = recordRepository.findByWorkeridOrderByTimeDesc(workerid);

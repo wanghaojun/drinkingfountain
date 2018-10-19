@@ -5,6 +5,7 @@ import com.whj.water.model.User;
 import com.whj.water.model.Worker;
 import com.whj.water.repository.UserRepository;
 import com.whj.water.repository.WorkerRepository;
+import com.whj.water.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,27 +21,12 @@ public class WorkerController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/saveUser",method = RequestMethod.POST)
     public Object saveUser(String name,String phone,String province,String city,String region,String address, String type,String wxname){
-
-        if (wxname!=null && userRepository.findFirstByWxname(wxname)!=null){
-            return new Message(-1,"微信用户已经存在");
-        }
-
-        if (userRepository.findFirstByPhone(phone)!=null){
-            return new Message(-1,"手机用户已经存在");
-        }
-
-        User user = new User();
-        user.setName(name);
-        user.setPhone(phone);
-        user.setProvince(province);
-        user.setCity(city);
-        user.setRegion(region);
-        user.setAddress(address);
-        user.setType(type);
-        user.setWxname(wxname);
-        return userRepository.save(user);
+        return userService.crateUser(name,phone,province,city,region,address,type,wxname);
     }
 
     @RequestMapping(value = "/saveWorker",method = RequestMethod.POST)
