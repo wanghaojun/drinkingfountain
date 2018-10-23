@@ -1,7 +1,6 @@
 package com.whj.water.controller;
 
 import com.whj.water.dto.Message;
-import com.whj.water.model.User;
 import com.whj.water.model.Worker;
 import com.whj.water.repository.UserRepository;
 import com.whj.water.repository.WorkerRepository;

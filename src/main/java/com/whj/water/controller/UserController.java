@@ -1,7 +1,5 @@
 package com.whj.water.controller;
 
-import com.whj.water.dto.Message;
-import com.whj.water.model.User;
 import com.whj.water.repository.UserRepository;
 import com.whj.water.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
