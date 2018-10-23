@@ -18,6 +18,25 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 更新用户信息
+     * @param userid 用户id
+     * @param name 用户姓名
+     * @param phone 手机号
+     * @param province 省份
+     * @param city 城市
+     * @param region 地区
+     * @param address 详细地址
+     * @param type 净水器类型
+     * @param wxname 微信名
+     * @return 用户信息
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public Object update(int userid,String name,String phone,String province,String city,String region,String address, String type,String wxname){
+        return userService.updateUser(userid,name,phone,province,city,region,address,type,wxname);
+    }
+
+
+    /**
      * 查询所有用户信息
      * @return 用户信息
      */

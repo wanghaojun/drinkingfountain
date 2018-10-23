@@ -14,6 +14,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public Object updateUser(int userid,String name,String phone,String province,String city,String region,String address, String type,String wxname){
+        if (!userRepository.existsById(userid)){
+            return new Message(-1,"null user");
+        }
+        User user = userRepository.findById(userid).get();
+        user.setName(name);
+        user.setPhone(phone);
+        user.setProvince(province);
+        user.setCity(city);
+        user.setRegion(region);
+        user.setAddress(address);
+        user.setType(type);
+        user.setWxname(wxname);
+        return userRepository.save(user);
+    }
+
 
     public Object crateUser(String name,String phone,String province,String city,String region,String address, String type,String wxname){
 
