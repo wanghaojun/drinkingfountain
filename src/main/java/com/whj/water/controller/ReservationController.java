@@ -31,11 +31,32 @@ public class ReservationController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 新建预约记录
+     * @param userid 用户id
+     * @param serviceid 服务id
+     * @return 预约记录
+     */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public Object create(int userid,int serviceid){
         return reservationService.create(userid,serviceid);
     }
 
+    /**
+     * 获取预约人数
+     * @return 预约人数
+     */
+    @RequestMapping(value = "/count")
+    public Object count(){
+        return reservationService.count();
+    }
+
+    /**
+     * 确认支付某次服务
+     * @param reservationid 预约id
+     * @return 确认支付成功：返回预约信息
+     *          失败：-1，失败原因
+     */
     @RequestMapping(value = "/pay",method = RequestMethod.POST)
     public Object pay(int reservationid){
         if (!reservationRepository.findById(reservationid).isPresent()){
@@ -49,6 +70,13 @@ public class ReservationController {
         return reservationRepository.save(reservation);
     }
 
+    /**
+     * 确认完成某次服务
+     * @param reservationid 预约id
+     * @param workerid 工人工号
+     * @return 确认服务成功：返回预约信息
+     *         失败：-1，失败原因
+     */
     @RequestMapping(value = "/service",method = RequestMethod.POST)
     public Object service(int reservationid,int workerid){
         if (!reservationRepository.findById(reservationid).isPresent()){
@@ -64,15 +92,29 @@ public class ReservationController {
     }
 
 
+    /**
+     * 获取所有预约记录
+     * @return 预约记录
+     */
     @RequestMapping("/findAll")
     public Object findAll(){
         return reservationRepository.findAll();
     }
 
+    /**
+     * 获取预约记录及详细信息
+     * @return 预约的详细信息
+     */
     @RequestMapping("/findAllInfo")
     public Object findAllInfo(){
         return reservationService.getInfo(reservationRepository.findAll());
     }
+
+    /**
+     * 获取某用户的详细预约信息
+     * @param userid 用户id
+     * @return 预约详细信息
+     */
     @RequestMapping("/findByUserid")
     public Object findByUserId(int userid){
 
@@ -84,6 +126,11 @@ public class ReservationController {
                 .findByUseridOrderByTimeDesc(userid));
     }
 
+    /**
+     * 获取某服务的详细预约信息
+     * @param serviceid 服务id
+     * @return 预约详细信息
+     */
     @RequestMapping("/findByServiceid")
     public Object findByServiceid(int serviceid){
 
@@ -95,6 +142,11 @@ public class ReservationController {
                 .findByServiceIdOrderByTimeDesc(serviceid));
     }
 
+    /**
+     * 通过用户手机查找某用户的详细预约信息
+     * @param phone 手机号
+     * @return 预约详细信息
+     */
     @RequestMapping("/findByUserPhone")
     public Object findByUserPhone(String phone){
 

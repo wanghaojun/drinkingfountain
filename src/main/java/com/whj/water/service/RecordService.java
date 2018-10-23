@@ -68,6 +68,11 @@ public class RecordService {
         return getRecordInfo(records);
     }
 
+    public Object findByUserid(int userid){
+        Iterable<Record> records = recordRepository.findByUseridOrderByTimeDesc(userid);
+        return getRecordInfo(records);
+    }
+
     public  ArrayList<RecordInfo> getRecordInfo(Iterable<Record> records){
 
         Iterator<Record> recordIterator = records.iterator();

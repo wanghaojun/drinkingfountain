@@ -17,6 +17,13 @@ public class ServiceController {
     private ServiceRepository serviceRepository;
 
 
+    /**
+     * 新建一个服务
+     * @param name 服务名字
+     * @param price 服务价格
+     * @param detail 服务详情
+     * @return 服务
+     */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public Object create(String name,String price,String detail){
         Service service = new Service();
@@ -26,11 +33,21 @@ public class ServiceController {
         return  serviceRepository.save(service);
     }
 
+    /**
+     * 获取所有服务信息
+     * @return 服务信息
+     */
     @RequestMapping("/findAll")
     public Object findAll(){
         return serviceRepository.findAll();
     }
 
+    /**
+     * 删除服务
+     * @param serviceid 服务id
+     * @return 删除成功：1
+     *         删除失败：-1
+     */
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Object delete(int serviceid){
         if (serviceRepository.existsById(serviceid)){

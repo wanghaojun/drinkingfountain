@@ -26,6 +26,10 @@ public class ReservationService {
     @Autowired
     private ServiceRepository serviceRepository;
 
+    public Object count(){
+        return reservationRepository.count();
+    }
+
     public Object create(int userid,int serviceid){
 
         if (!userRepository.findById(userid).isPresent()){
