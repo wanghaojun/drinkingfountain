@@ -64,7 +64,7 @@ public class ReservationController {
         }
         Reservation reservation = reservationRepository.findById(reservationid).get();
         if (reservation.getIspay() != 0){
-            return  new Message(-1,"pay error");
+            return  new Message(-1,"don't pay again");
         }
         reservation.setIspay(1);
         return reservationRepository.save(reservation);
@@ -84,7 +84,7 @@ public class ReservationController {
         }
         Reservation reservation = reservationRepository.findById(reservationid).get();
         if (reservation.getIsservice() != 0){
-            return new Message(-1,"service error");
+            return new Message(-1,"don't service again");
         }
         reservation.setIsservice(1);
         recordService.create(reservation.getUserid(),workerid,reservation.getServiceId());
