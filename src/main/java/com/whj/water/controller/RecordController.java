@@ -43,6 +43,11 @@ public class RecordController {
         return  recordService.create(userid,workerid,serviceid);
     }
 
+    @RequestMapping(value = "/getLastRecord",method = RequestMethod.GET)
+    public Object getLastRecord(int userid){
+        return recordService.getLastRecord(userid);
+    }
+
     /**
      * 获取某工人的服务记录
      * @param workerid 工人工号

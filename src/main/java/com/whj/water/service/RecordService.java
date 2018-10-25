@@ -109,8 +109,16 @@ public class RecordService {
 
         }
         return recordInfos;
+    }
 
-
+    public Object getLastRecord(int userid){
+        Iterator<Record> recordIterator = recordRepository.findByUseridOrderByTimeDesc(userid).iterator();
+        if (recordIterator.hasNext()){
+            Record record = recordIterator.next();
+            return record;
+        }else {
+            return new Message(-1,"null record");
+        }
     }
 
 
