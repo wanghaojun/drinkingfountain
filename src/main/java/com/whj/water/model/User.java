@@ -19,6 +19,7 @@ public class User {
     private String city;
     private String region;
     private String address;
+    private String lastservice;
 
     public User() {
     }
@@ -97,5 +98,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getLastservice() {
+        return lastservice;
+    }
+
+    public void setLastservice(String lastservice) {
+        this.lastservice = lastservice;
     }
 }

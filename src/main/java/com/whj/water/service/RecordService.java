@@ -60,6 +60,9 @@ public class RecordService {
         record.setMonth(calendar.get(Calendar.MONTH)+1);
         record.setYear(calendar.get(Calendar.YEAR));
         record.setDay(calendar.get(Calendar.DATE));
+        User user=userRepository.findById(userid).get();
+        user.setLastservice(dateFormat.format(new Date()));
+        userRepository.save(user);
         return recordRepository.save(record);
     }
 
