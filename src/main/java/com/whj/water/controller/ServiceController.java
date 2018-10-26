@@ -57,6 +57,14 @@ public class ServiceController {
         }
     }
 
+    @RequestMapping("/findOne")
+    public Object findOne(int serviceid){
+        if (!serviceRepository.existsById(serviceid)){
+            return new Message(-1,"null service");
+        }
+        return serviceRepository.findById(serviceid).get();
+    }
+
 
 
 

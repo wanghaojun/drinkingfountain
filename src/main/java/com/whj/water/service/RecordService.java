@@ -67,11 +67,17 @@ public class RecordService {
     }
 
     public Object findByWorkerid(int workerid){
+        if (!workerRepository.existsById(workerid)){
+            return new Message(-1,"null worker");
+        }
         Iterable<Record> records = recordRepository.findByWorkeridOrderByTimeDesc(workerid);
         return getRecordInfo(records);
     }
 
     public Object findByUserid(int userid){
+        if (!userRepository.existsById(userid)){
+            return new Message(0,"null user");
+        }
         Iterable<Record> records = recordRepository.findByUseridOrderByTimeDesc(userid);
         return getRecordInfo(records);
     }
@@ -115,6 +121,9 @@ public class RecordService {
     }
 
     public Object getLastRecord(int userid){
+        if (!userRepository.existsById(userid)){
+            return new Message(0,"null user");
+        }
         Iterator<Record> recordIterator = recordRepository.findByUseridOrderByTimeDesc(userid).iterator();
         if (recordIterator.hasNext()){
             Record record = recordIterator.next();
