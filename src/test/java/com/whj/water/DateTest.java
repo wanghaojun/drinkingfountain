@@ -16,6 +16,7 @@ public class DateTest {
         System.out.println(calendar.get(Calendar.MONTH)+1);
         System.out.println(calendar.get(Calendar.DATE));
         System.out.println(calendar.get(Calendar.AM));
+        System.out.println(System.currentTimeMillis());
     }
 
 

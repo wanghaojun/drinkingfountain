@@ -50,7 +50,20 @@ public class UserService {
         user.setAddress(address);
         user.setType(type);
         user.setWxname(wxname);
+        user.setCreatetime(System.currentTimeMillis());
         return userRepository.save(user);
+    }
+
+    public Object getSignupDay(int userid){
+        if (!userRepository.existsById(userid)){
+            return new Message(-1,"null user");
+        }
+        User user = userRepository.findById(userid).get();
+        Long now = System.currentTimeMillis();
+        Long day;
+        day = (now - user.getCreatetime())/1000/60/60/24;
+        return day;
+
     }
 
 }

@@ -11,5 +11,7 @@ public class StatisticsInfo {
     public String lasttime;
     public int count;
 
+    public Boolean isReservation;
+
 
 }

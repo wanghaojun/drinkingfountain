@@ -20,6 +20,7 @@ public class User {
     private String region;
     private String address;
     private String lastservice;
+    private Long createtime;
 
     public User() {
     }
@@ -106,5 +107,13 @@ public class User {
 
     public void setLastservice(String lastservice) {
         this.lastservice = lastservice;
+    }
+
+    public Long getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Long createtime) {
+        this.createtime = createtime;
     }
 }

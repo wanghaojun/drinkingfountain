@@ -80,4 +80,9 @@ public class UserController {
         return userService.crateUser(name,phone,province,city,region,address,type,wxname);
     }
 
+    @RequestMapping("/signupday")
+    public Object getSignupDay(int userid){
+        return userService.getSignupDay(userid);
+    }
+
 }

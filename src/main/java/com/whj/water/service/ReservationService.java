@@ -30,6 +30,18 @@ public class ReservationService {
         return reservationRepository.count();
     }
 
+    private Boolean getIsReservation(int serviceid,int userid){
+        ArrayList<Reservation> reservations =  reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid);
+        if (reservations.size()==0){
+            return false;
+        }
+        if (reservations.get(0).getIsservice()==0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public Object create(int userid,int serviceid){
 
         if (!userRepository.findById(userid).isPresent()){
@@ -39,6 +51,11 @@ public class ReservationService {
         if (!serviceRepository.findById(serviceid).isPresent()){
             return new Message(-1,"null service");
         }
+
+        if (getIsReservation(serviceid,userid)){
+            return new Message(-1,"don't reseve again");
+        }
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");     // 北京
         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));

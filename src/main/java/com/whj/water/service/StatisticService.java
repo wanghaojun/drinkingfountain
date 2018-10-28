@@ -24,16 +24,28 @@ public class StatisticService {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    public int getCount(int serviceid,int userid){
+    private int getCount(int serviceid,int userid){
         return reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid).size();
     }
 
-    public String getLastime(int serviceid,int userid){
+    private String getLastime(int serviceid,int userid){
         ArrayList<Reservation> reservations =  reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid);
         if (reservations.size()==0){
             return "0";
         }else {
             return reservations.get(0).getTime();
+        }
+    }
+
+    private Boolean getIsReservation(int serviceid,int userid){
+        ArrayList<Reservation> reservations =  reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid);
+        if (reservations.size()==0){
+            return false;
+        }
+        if (reservations.get(0).getIsservice()==0){
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -54,6 +66,7 @@ public class StatisticService {
             statisticsInfo.userid = userid;
             statisticsInfo.count = getCount(service.getId(),userid);
             statisticsInfo.lasttime = getLastime(service.getId(),userid);
+            statisticsInfo.isReservation = getIsReservation(service.getId(),userid);
             statisticsInfos.add(statisticsInfo);
         }
         return statisticsInfos;
