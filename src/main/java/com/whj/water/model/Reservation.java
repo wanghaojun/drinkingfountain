@@ -22,6 +22,9 @@ public class Reservation {
     private int ispay = 0;
     private int isservice = 0;
 
+    private String reservationtime;
+    private String workercard;
+
     public Reservation() {
     }
 
@@ -91,5 +94,21 @@ public class Reservation {
 
     public void setIsservice(int isservice) {
         this.isservice = isservice;
+    }
+
+    public String getReservationtime() {
+        return reservationtime;
+    }
+
+    public void setReservationtime(String reservationtime) {
+        this.reservationtime = reservationtime;
+    }
+
+    public String getWorkercard() {
+        return workercard;
+    }
+
+    public void setWorkercard(String workcard) {
+        this.workercard = workcard;
     }
 }

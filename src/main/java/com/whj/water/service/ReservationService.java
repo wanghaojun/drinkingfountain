@@ -96,6 +96,17 @@ public class ReservationService {
         return reservationInfos;
     }
 
+    public Object reserve(int reservationid,String year,String month,String day,String hour,String workercard){
+        if (!reservationRepository.existsById(reservationid)){
+            return new Message(-1,"null reservation");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        String time = year + '-' + month + '-' + day + '-' +hour;
+        reservation.setReservationtime(time);
+        reservation.setWorkercard(workercard);
+        return reservationRepository.save(reservation);
+    }
+
 
 
 }

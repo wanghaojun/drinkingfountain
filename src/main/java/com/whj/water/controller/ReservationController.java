@@ -159,5 +159,10 @@ public class ReservationController {
                 .findFirstByPhone(phone).getId()));
     }
 
+    @RequestMapping(value = "/reserve",method = RequestMethod.POST)
+    public Object reserve(int reservationid,String year,String month,String day,String hour,String workercard){
+        return reservationService.reserve(reservationid,year,month,day,hour,workercard);
+    }
+
 
 }
