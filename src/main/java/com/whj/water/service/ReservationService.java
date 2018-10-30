@@ -115,6 +115,10 @@ public class ReservationService {
             reservationInfo.ispay = reservation.getIspay();
             reservationInfo.isservice = reservation.getIsservice();
 
+            reservationInfo.reservationtime=reservation.getReservationtime();
+            reservationInfo.workercard=reservation.getWorkercard();
+            reservationInfo.distribution=reservation.isDistribution();
+
             reservationInfos.add(reservationInfo);
         }
 

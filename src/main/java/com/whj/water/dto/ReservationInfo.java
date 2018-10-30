@@ -30,5 +30,9 @@ public class ReservationInfo {
     public int ispay;
     public int isservice;
 
+    public String reservationtime;
+    public String workercard;
+    public boolean distribution;
+
 
 }

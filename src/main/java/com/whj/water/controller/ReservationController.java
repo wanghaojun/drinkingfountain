@@ -154,7 +154,7 @@ public class ReservationController {
 
     @RequestMapping(value = "/getbyserviceanduser")
     public Object getByServiceAndUser(int serviceid,int userid){
-        return reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid);
+        return reservationService.getInfo(reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid));
     }
 
     @RequestMapping(value = "/setworker",method = RequestMethod.POST)
@@ -164,12 +164,12 @@ public class ReservationController {
 
     @RequestMapping(value = "/findbyworkercard",method = RequestMethod.GET)
     public Object findByWorkerCard(String workercard){
-        return reservationRepository.findByWorkercardOrderByTimeDesc(workercard);
+        return reservationService.getInfo(reservationRepository.findByWorkercardOrderByTimeDesc(workercard));
     }
 
     @RequestMapping(value = "/findundistribution")
     public Object findUnDistribution(){
-        return reservationRepository.findByDistributionOrderByTimeDesc(false);
+        return reservationService.getInfo(reservationRepository.findByDistributionOrderByTimeDesc(false));
     }
 
     @RequestMapping(value = "/setundistribution")
