@@ -85,4 +85,9 @@ public class UserController {
         return userService.getSignupDay(userid);
     }
 
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public Object delete(String phone){
+        return userService.deleteUser(phone);
+    }
+
 }

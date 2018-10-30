@@ -37,12 +37,11 @@ public class WorkerService {
         return  workerRepository.save(worker);
     }
 
-    public Object updateWorker(int workerid,String name,String wxname,String card,String phone,String province,String city,String region){
+    public Object updateWorker(int workerid,String name,String wxname,String phone,String province,String city,String region){
         if (workerRepository.findById(workerid).isPresent()){
          Worker worker = workerRepository.findById(workerid).get();
          worker.setName(name);
          worker.setWxname(wxname);
-         worker.setCard(card);
          worker.setPhone(phone);
          worker.setProvince(province);
          worker.setCity(city);

@@ -64,7 +64,7 @@ public class WorkerController {
             return workerService.saveWorker(name, wxname, card, phone, province, city, region);
         }else {
             int id = Integer.valueOf(workerid);
-            return workerService.updateWorker(id,name,wxname,card,phone,province,city,region);
+            return workerService.updateWorker(id,name,wxname,phone,province,city,region);
         }
     }
 

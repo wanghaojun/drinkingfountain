@@ -14,4 +14,8 @@ public interface ReservationRepository extends CrudRepository<Reservation,Intege
 
     Reservation findFirstByServiceIdAndUserid(int serviceid,int userid);
 
+    ArrayList<Reservation> findByWorkercardOrderByTimeDesc(String workercard);
+    ArrayList<Reservation> findByDistributionOrderByTimeDesc(boolean distribution);
+
+
 }

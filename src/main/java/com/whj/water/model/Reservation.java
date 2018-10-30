@@ -24,6 +24,7 @@ public class Reservation {
 
     private String reservationtime;
     private String workercard;
+    private boolean distribution=false;
 
     public Reservation() {
     }
@@ -110,5 +111,13 @@ public class Reservation {
 
     public void setWorkercard(String workcard) {
         this.workercard = workcard;
+    }
+
+    public boolean isDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(boolean distribution) {
+        this.distribution = distribution;
     }
 }

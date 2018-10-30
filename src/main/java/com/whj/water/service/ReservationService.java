@@ -4,9 +4,11 @@ import com.whj.water.dto.Message;
 import com.whj.water.dto.ReservationInfo;
 import com.whj.water.model.Reservation;
 import com.whj.water.model.User;
+import com.whj.water.model.Worker;
 import com.whj.water.repository.ReservationRepository;
 import com.whj.water.repository.ServiceRepository;
 import com.whj.water.repository.UserRepository;
+import com.whj.water.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,12 @@ public class ReservationService {
 
     @Autowired
     private ServiceRepository serviceRepository;
+
+    @Autowired
+    private WorkerRepository workerRepository;
+
+    @Autowired
+    private RecordService recordService;
 
     public Object count(){
         return reservationRepository.count();
@@ -113,17 +121,68 @@ public class ReservationService {
         return reservationInfos;
     }
 
-    public Object reserve(int reservationid,String year,String month,String day,String hour,String workercard){
+    public Object reserve(int reservationid,String year,String month,String day,String hour){
         if (!reservationRepository.existsById(reservationid)){
             return new Message(-1,"null reservation");
         }
         Reservation reservation = reservationRepository.findById(reservationid).get();
         String time = year + '-' + month + '-' + day + '-' +hour;
         reservation.setReservationtime(time);
-        reservation.setWorkercard(workercard);
         return reservationRepository.save(reservation);
     }
 
+    public Object pay(int reservationid){
+        if (!reservationRepository.findById(reservationid).isPresent()){
+            return new Message(-1,"null reservation");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        if (reservation.getIspay() != 0){
+            return  new Message(-1,"don't pay again");
+        }
+        reservation.setIspay(1);
+        if (reservation.getIsservice()==1){
+            Worker worker = workerRepository.findFirstByCard(reservation.getWorkercard());
+            recordService.create(reservation.getUserid(),worker.getId(),reservation.getServiceId());
+        }
+        return reservationRepository.save(reservation);
+    }
 
+    public Object service(int reservationid,int workerid){
+        if (!reservationRepository.findById(reservationid).isPresent()){
+            return new Message(-1,"null reservation");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        if (reservation.getIsservice() != 0){
+            return new Message(-1,"don't service again");
+        }
+        reservation.setIsservice(1);
+        if (reservation.getIspay()==1){
+            recordService.create(reservation.getUserid(),workerid,reservation.getServiceId());
+        }
+        return reservationRepository.save(reservation);
+    }
+
+    public Object setWorker(int reservationid,String workercrad){
+        if (!reservationRepository.findById(reservationid).isPresent()){
+            return new Message(-1,"null reservation");
+        }
+        if (workerRepository.findFirstByCard(workercrad)==null){
+            return new Message(-1,"null worker");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        reservation.setDistribution(true);
+        reservation.setWorkercard(workercrad);
+        return reservationRepository.save(reservation);
+    }
+
+    public Object unDistribution(int reservationid){
+        if (!reservationRepository.findById(reservationid).isPresent()){
+            return new Message(-1,"null reservation");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        reservation.setDistribution(false);
+        reservation.setWorkercard(null);
+        return reservationRepository.save(reservation);
+    }
 
 }

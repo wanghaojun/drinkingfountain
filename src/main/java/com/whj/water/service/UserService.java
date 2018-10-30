@@ -66,4 +66,14 @@ public class UserService {
 
     }
 
+    public Object deleteUser(String phone){
+        User user=userRepository.findFirstByPhone(phone);
+        if (user==null){
+            return new Message(-1,"null user");
+        }
+        userRepository.delete(user);
+        return new Message(1,"delete  "+user.getPhone()+"  success!");
+
+    }
+
 }

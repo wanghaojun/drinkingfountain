@@ -2,9 +2,11 @@ package com.whj.water.controller;
 
 import com.whj.water.dto.Message;
 import com.whj.water.model.Reservation;
+import com.whj.water.model.Worker;
 import com.whj.water.repository.ReservationRepository;
 import com.whj.water.repository.ServiceRepository;
 import com.whj.water.repository.UserRepository;
+import com.whj.water.repository.WorkerRepository;
 import com.whj.water.service.RecordService;
 import com.whj.water.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class ReservationController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private WorkerRepository workerRepository;
 
     /**
      * 新建预约记录
@@ -59,15 +64,7 @@ public class ReservationController {
      */
     @RequestMapping(value = "/pay",method = RequestMethod.POST)
     public Object pay(int reservationid){
-        if (!reservationRepository.findById(reservationid).isPresent()){
-            return new Message(-1,"null reservation");
-        }
-        Reservation reservation = reservationRepository.findById(reservationid).get();
-        if (reservation.getIspay() != 0){
-            return  new Message(-1,"don't pay again");
-        }
-        reservation.setIspay(1);
-        return reservationRepository.save(reservation);
+        return reservationService.pay(reservationid);
     }
 
     /**
@@ -79,16 +76,7 @@ public class ReservationController {
      */
     @RequestMapping(value = "/service",method = RequestMethod.POST)
     public Object service(int reservationid,int workerid){
-        if (!reservationRepository.findById(reservationid).isPresent()){
-            return new Message(-1,"null reservation");
-        }
-        Reservation reservation = reservationRepository.findById(reservationid).get();
-        if (reservation.getIsservice() != 0){
-            return new Message(-1,"don't service again");
-        }
-        reservation.setIsservice(1);
-        recordService.create(reservation.getUserid(),workerid,reservation.getServiceId());
-        return reservationRepository.save(reservation);
+       return reservationService.service(reservationid,workerid);
     }
 
 
@@ -160,9 +148,33 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reserve",method = RequestMethod.POST)
-    public Object reserve(int reservationid,String year,String month,String day,String hour,String workercard){
-        return reservationService.reserve(reservationid,year,month,day,hour,workercard);
+    public Object reserve(int reservationid,String year,String month,String day,String hour){
+        return reservationService.reserve(reservationid,year,month,day,hour);
     }
 
+    @RequestMapping(value = "/getbyserviceanduser")
+    public Object getByServiceAndUser(int serviceid,int userid){
+        return reservationRepository.findByServiceIdAndUseridOrderByTimeDesc(serviceid,userid);
+    }
+
+    @RequestMapping(value = "/setworker",method = RequestMethod.POST)
+    public Object setWorker(int reservationid,String workercard){
+        return reservationService.setWorker(reservationid,workercard);
+    }
+
+    @RequestMapping(value = "/findbyworkercard",method = RequestMethod.GET)
+    public Object findByWorkerCard(String workercard){
+        return reservationRepository.findByWorkercardOrderByTimeDesc(workercard);
+    }
+
+    @RequestMapping(value = "/findundistribution")
+    public Object findUnDistribution(){
+        return reservationRepository.findByDistributionOrderByTimeDesc(false);
+    }
+
+    @RequestMapping(value = "/setundistribution")
+    public Object setUnDistribution(int reservationid){
+        return reservationService.unDistribution(reservationid);
+    }
 
 }
