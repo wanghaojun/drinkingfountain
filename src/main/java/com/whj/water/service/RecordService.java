@@ -108,6 +108,7 @@ public class RecordService {
             recordInfo.userprovince = user.getProvince();
             recordInfo.usercity = user.getCity();
             recordInfo.userregion = user.getRegion();
+            recordInfo.usertype=user.getType();
 
             recordInfo.year = record.getYear();
             recordInfo.month = record.getMonth();

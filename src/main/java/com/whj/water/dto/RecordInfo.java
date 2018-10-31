@@ -11,6 +11,7 @@ public class RecordInfo {
     public String userphone;
     public String userprovince;
     public String usercity;
+    public String usertype;
     public String userregion;
     public String useraddress;
 
