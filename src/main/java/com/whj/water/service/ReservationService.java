@@ -189,4 +189,9 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public void deleteByUserid(int userid){
+        Iterable<Reservation> reservations=reservationRepository.findByUseridOrderByTimeDesc(userid);
+        reservationRepository.deleteAll(reservations);
+    }
+
 }

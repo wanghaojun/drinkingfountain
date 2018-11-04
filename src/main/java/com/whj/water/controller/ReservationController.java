@@ -177,4 +177,14 @@ public class ReservationController {
         return reservationService.unDistribution(reservationid);
     }
 
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public Object delete(int reservationid){
+        if (!reservationRepository.existsById(reservationid)){
+            return new Message(-1,"null reservation");
+        }
+        Reservation reservation = reservationRepository.findById(reservationid).get();
+        reservationRepository.deleteById(reservationid);
+        return reservation;
+    }
+
 }

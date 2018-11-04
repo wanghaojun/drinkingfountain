@@ -134,5 +134,9 @@ public class RecordService {
         }
     }
 
+    public void deleteByUserid(int userid){
+        recordRepository.deleteAll(recordRepository.findByUseridOrderByTimeDesc(userid));
+    }
+
 
 }

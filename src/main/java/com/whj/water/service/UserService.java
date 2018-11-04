@@ -14,6 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RecordService recordService;
+
+    @Autowired
+    private ReservationService reservationService;
+
     public Object updateUser(int userid,String name,String phone,String province,String city,String region,String address, String type,String wxname){
         if (!userRepository.existsById(userid)){
             return new Message(-1,"null user");
@@ -71,6 +77,8 @@ public class UserService {
         if (user==null){
             return new Message(-1,"null user");
         }
+        recordService.deleteByUserid(user.getId());
+        reservationService.deleteByUserid(user.getId());
         userRepository.delete(user);
         return new Message(1,"delete  "+user.getPhone()+"  success!");
 
