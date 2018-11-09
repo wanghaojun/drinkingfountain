@@ -13,6 +13,7 @@ public class Service {
     private String name;
     private String price;
     private String detail;
+    private String logo;
 
     private String imgurl1;
     private String imgurl2;
@@ -46,6 +47,14 @@ public class Service {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getImgurl1() {

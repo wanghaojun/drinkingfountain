@@ -24,11 +24,16 @@ public class ServiceController {
      * @return 服务
      */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public Object create(String name,String price,String detail){
+    public Object create(String name,String price,String detail,String logo,String imgurl1,String imgurl2,String imgurl3){
         Service service = new Service();
         service.setName(name);
         service.setPrice(price);
         service.setDetail(detail);
+        service.setLogo(logo);
+        service.setImgurl1(imgurl1);
+        service.setImgurl2(imgurl2);
+        service.setImgurl3(imgurl3);
+
         return  serviceRepository.save(service);
     }
 
