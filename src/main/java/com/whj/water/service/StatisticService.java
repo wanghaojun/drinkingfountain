@@ -63,6 +63,7 @@ public class StatisticService {
             statisticsInfo.servicename=service.getName();
             statisticsInfo.serviceprice = service.getPrice();
             statisticsInfo.servicedetail = service.getDetail();
+            statisticsInfo.servicelogo = service.getLogo();
             statisticsInfo.userid = userid;
             statisticsInfo.count = getCount(service.getId(),userid);
             statisticsInfo.lasttime = getLastime(service.getId(),userid);

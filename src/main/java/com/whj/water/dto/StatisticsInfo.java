@@ -6,6 +6,7 @@ public class StatisticsInfo {
     public String servicename;
     public String serviceprice;
     public String servicedetail;
+    public String servicelogo;
 
     public int userid;
     public String lasttime;
