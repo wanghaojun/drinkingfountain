@@ -38,8 +38,7 @@ public class UserService {
 
 
     public Object crateUser(String name,String phone,String province,String city,String region,String address, String type,String wxname){
-
-        if (wxname!=null && userRepository.findFirstByWxname(wxname)!=null){
+        if (!(wxname.equals("")) && userRepository.findFirstByWxname(wxname)!=null){
             return new Message(-1,"微信用户已经存在");
         }
 
